@@ -1,3 +1,6 @@
+
+**this was forked from @keensoft https://github.com/keensoft that is why im not going to name it to something else**
+
 simplify-share
 ==============
 
@@ -12,7 +15,7 @@ Users not in the group will not see regions (metadata, versions, workflows ...) 
 
 * Document Details
 
-By default, the group the module looks for must have an ID of "GROUP_SIMPLE_USER". The display name can be anything. When you create the group you do not specify "GROUP_"--Alfresco will prepend that for you.
+By default, the group the module looks for must have an ID of "GROUP_LIMITED_ACTIONS". The display name can be anything. When you create the group you do not specify "GROUP_"--Alfresco will prepend that for you.
 
 **This add-on does not changes the low-level permissions so that if someone figures out how to launch actions without the user interface, the repository tier let them do that**
 
@@ -30,4 +33,4 @@ Once the AMPs are deployed, start up Alfresco.
 
 ### Create and Populate the Group
 
-Create a new group with an ID of "SIMPLE_USER". You can add individuals and groups to this group.
+Create a new group with an ID of "LIMITED_ACTIONS". You can add individuals and groups to this group.
