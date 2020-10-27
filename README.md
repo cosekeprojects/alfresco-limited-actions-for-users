@@ -17,6 +17,8 @@ Users not in the group will not see regions (metadata, versions, workflows ...) 
 
 By default, the group the module looks for must have an ID of "GROUP_LIMITED_ACTIONS". The display name can be anything. When you create the group you do not specify "GROUP_"--Alfresco will prepend that for you.
 
+Also download and delete pages buttons are by default from users that dont belong to the GROUP_ALFRESCO_ADMINISTRATORS group
+
 **This add-on does not changes the low-level permissions so that if someone figures out how to launch actions without the user interface, the repository tier let them do that**
 
 Manual Installation
