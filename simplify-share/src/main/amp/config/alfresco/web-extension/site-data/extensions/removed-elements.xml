@@ -1,5 +1,6 @@
 <extension>
 	<modules>
+
 		<module>
 			<id>Hide components</id>
 			<version>1.1</version>
@@ -98,7 +99,13 @@
 					</sub-components>
 				</component>
 			</components>
+			
+		</module>
 
+		<module>
+			<id>Hide Functions for non admin</id>
+			<version>1.1</version>
+			<auto-deploy>true</auto-deploy>
 			<!-- Required for custom toolbar at Document Library -->
 			<customizations>
 				<customization>
@@ -108,5 +115,6 @@
 			</customizations>
 			
 		</module>
+
 	</modules>
 </extension>

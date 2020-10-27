@@ -1,70 +1,151 @@
 <extension>
 	<modules>
 		<module>
-			<id>Hide actions</id>
-			<version>1.1</version>
-			<auto-deploy>true</auto-deploy>
+			<id>
+				Hide delete pages actions
+			</id>
+			<version>
+				1.1
+			</version>
+			<auto-deploy>
+				true
+			</auto-deploy>
 			<evaluator type="group.module.evaluator">
 				<params>
-					<groups>GROUP_LIMITED_ACTIONS</groups>
+					<groups>
+						GROUP_ALFRESCO_ADMINISTRATORS
+					</groups>
+					<negate>
+						true
+					</negate>
 				</params>
 			</evaluator>
 			<configurations>
-			
-			   <!-- 
-			   
-			      Include any action from
-			      
-			      https://github.com/Alfresco/share/blob/dff4098c2f193c9708f2735c12ef9374d7614ac6/share/src/main/resources/alfresco/share-documentlibrary-config.xml
-			      
-			      to make it available to users from LIMITED_ACTIONS group.
-			      
-               -->
-			
-			   <config evaluator="string-compare" condition="DocLibActions" replace="true">
-			
-			      <actionGroups>
-			
-			         <actionGroup id="document-browse">
-			            <!-- <action index="100" id="document-download"/> -->
-			         </actionGroup>
-			
-			         <actionGroup id="document-details">
-			         </actionGroup>
-			
-			         <actionGroup id="folder-browse">
-			         </actionGroup>
-			
-			         <actionGroup id="folder-details">
-			         </actionGroup>
-			
-			         <actionGroup id="document-link-browse">
-			         </actionGroup>
-			
-			         <actionGroup id="document-link-details">
-			         </actionGroup>
-			
-			         <actionGroup id="folder-link-browse">
-			         </actionGroup>
-			
-			         <actionGroup id="folder-link-details">
-			         </actionGroup>
-			
-			      </actionGroups>
-			   </config>
-
-			   <!-- Document Library config section -->
+				<config evaluator="string-compare" condition="DocLibActions">
+					<actionGroups>
+						<actionGroup id="document-browse">
+							<action index="501" id="pdf-delete-page" appendEvaluators="true">
+								<evaluator>
+									evaluator.doclib.action.disableAction
+								</evaluator>
+							</action>
+						</actionGroup>
+					</actionGroups>
+				</config>
+			</configurations>
+		</module>
+		
+		<module>
+			<id>
+				Remove Download for non admin users
+			</id>
+			<version>
+				1.1
+			</version>
+			<auto-deploy>
+				true
+			</auto-deploy>
+			<evaluator type="group.module.evaluator">
+				<params>
+					<groups>
+						GROUP_ALFRESCO_ADMINISTRATORS
+					</groups>
+					<negate>
+						true
+					</negate>
+				</params>
+			</evaluator>
+			<configurations>
+				<config evaluator="string-compare" condition="DocLibActions">
+					<actionGroups>
+						<actionGroup id="document-browse">
+							<action index="100" id="document-download" appendEvaluators="true">
+								<evaluator>
+									evaluator.doclib.action.disableAction
+								</evaluator>
+							</action>
+						</actionGroup>
+						<actionGroup id="folder-browse">
+							<action index="100" id="folder-download" appendEvaluators="true">
+								<evaluator>evaluator.doclib.action.disableAction</evaluator>
+							</action>
+						</actionGroup>
+						<actionGroup id="folder-details">
+							<action ndex="110" id="folder-download" subgroup="10" appendEvaluators="true">
+								<evaluator>evaluator.doclib.action.disableAction</evaluator>
+							</action>
+						</actionGroup>
+					</actionGroups>
+				</config>
 				<config evaluator="string-compare" condition="DocumentLibrary" replace="true">
 					<multi-select>
 						<!-- <action type="action-link" id="onActionDownload" icon="document-download" label="menu.selected-items.download" /> -->
-						<action type="action-link" id="onActionCopyTo" icon="document-copy-to" label="menu.selected-items.copy" notAspect="smf:smartFolder,smf:smartFolderChild"/>
-						<action type="action-link" id="onActionMoveTo" icon="document-move-to" permission="Delete" label="menu.selected-items.move" notAspect="smf:smartFolder,smf:smartFolderChild"/>
-						<action type="action-link" id="onActionAssignWorkflow" asset="document" icon="document-assign-workflow" label="menu.selected-items.assign-workflow"/>
+						<action type="action-link" id="onActionCopyTo" icon="document-copy-to" label="menu.selected-items.copy" notAspect="smf:smartFolder,smf:smartFolderChild" />
+						<action type="action-link" id="onActionMoveTo" icon="document-move-to" permission="Delete" label="menu.selected-items.move" notAspect="smf:smartFolder,smf:smartFolderChild" />
+						<action type="action-link" id="onActionAssignWorkflow" asset="document" icon="document-assign-workflow" label="menu.selected-items.assign-workflow" />
 						<!-- <action type="action-link" id="onActionDelete" icon="document-delete" permission="Delete" label="menu.selected-items.delete" notAspect="sys:undeletable,smf:smartFolder" /> -->
 					</multi-select>
 				</config>
-				
 			</configurations>
 		</module>
+		
+		<module>
+			<id>
+				Hide actions
+			</id>
+			<version>
+				1.1
+			</version>
+			<auto-deploy>
+				true
+			</auto-deploy>
+			<evaluator type="group.module.evaluator">
+				<params>
+					<groups>
+						GROUP_LIMITED_ACTIONS
+					</groups>
+				</params>
+			</evaluator>
+			<configurations>
+				<!--
+				Include any action from
+				
+				https://github.com/Alfresco/share/blob/dff4098c2f193c9708f2735c12ef9374d7614ac6/share/src/main/resources/alfresco/share-documentlibrary-config.xml
+				
+				to make it available to users from LIMITED_ACTIONS group.
+				-->
+				<config evaluator="string-compare" condition="DocLibActions" replace="true">
+					<actionGroups>
+						<actionGroup id="document-browse">
+						</actionGroup>
+						<actionGroup id="document-details">
+						</actionGroup>
+						<actionGroup id="folder-browse">
+						</actionGroup>
+						<actionGroup id="folder-details">
+						</actionGroup>
+						<actionGroup id="document-link-browse">
+						</actionGroup>
+						<actionGroup id="document-link-details">
+						</actionGroup>
+						<actionGroup id="folder-link-browse">
+						</actionGroup>
+						<actionGroup id="folder-link-details">
+						</actionGroup>
+					</actionGroups>
+				</config>
+				<!-- Document Library config section -->
+				<config evaluator="string-compare" condition="DocumentLibrary" replace="true">
+					<multi-select>
+						<!-- <action type="action-link" id="onActionDownload" icon="document-download" label="menu.selected-items.download" /> -->
+						<action type="action-link" id="onActionCopyTo" icon="document-copy-to" label="menu.selected-items.copy" notAspect="smf:smartFolder,smf:smartFolderChild" />
+						<action type="action-link" id="onActionMoveTo" icon="document-move-to" permission="Delete" label="menu.selected-items.move" notAspect="smf:smartFolder,smf:smartFolderChild" />
+						<action type="action-link" id="onActionAssignWorkflow" asset="document" icon="document-assign-workflow" label="menu.selected-items.assign-workflow" />
+						<!-- <action type="action-link" id="onActionDelete" icon="document-delete" permission="Delete" label="menu.selected-items.delete" notAspect="sys:undeletable,smf:smartFolder" /> -->
+					</multi-select>
+				</config>
+			</configurations>
+		</module>
+		
 	</modules>
 </extension>
